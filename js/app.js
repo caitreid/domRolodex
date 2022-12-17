@@ -15,27 +15,45 @@ const data = [
     { name: "Jem", address: "Starlight Music" }
 ]
 
-document.addEventListener('DOMContentLoaded', () => {
-    for (let i = 0; i < data.length; i++) {
-        // this will display each object
-        // console.log(data[i])
-        // this will display each objects name
+// function for populating data
+const populateData = ()=> {
+    for (let i =0; i < data.length; i ++) {
         console.log(`Name: ${data[i].name}`)
-
-        let name = data[i].name;
-
         // this will display each objects address
-        console.log(`Address: ${data[i].address}`)
-
-        let address = data[i].address
-
-        const div = document.createElement('div');
-
-        div.classList.add('info-container');
-
-        document.querySelector('body').append(div)
-
-        div.append(name)
-        div.append(address)
+        // console.log(`Address: ${data[i].address}`)
+        // This builds a container for our info
+        const infoContainer = document.createElement('div')
+        infoContainer.classList.add('info-container')
+        // this will add a name div for each name in our data
+        const nameDiv = document.createElement('div')
+        // gives each nameDiv the class 'name'
+        nameDiv.classList.add('name')
+        // populates names for every name div
+        nameDiv.innerText = data[i].name
+        // creates a div for my address data
+        const addressDiv = document.createElement('div')
+        // gives my address divs a little class
+        addressDiv.classList.add('address')
+        // adds address text to address divs
+        addressDiv.innerText = data[i].address
+        // adds my nameDiv to the infoContainer
+        infoContainer.appendChild(nameDiv)
+        // appends my address div to infoContainer
+        infoContainer.appendChild(addressDiv)
+        document.querySelector('body').appendChild(infoContainer)
     }
+
+}
+
+const addData = (name, address) => {
+    data.push({name, address})
+
+    populateData()
+}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    populateData()
 })
+
+
